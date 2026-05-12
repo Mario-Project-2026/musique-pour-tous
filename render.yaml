@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: musique-pour-tous
+    runtime: node
+    plan: free
+    buildCommand: npm install && npx prisma migrate deploy && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXTAUTH_URL
+        value: https://musique-pour-tous.onrender.com
+      - key: COSMIC_BUCKET_SLUG
+        value: my-project-production-095cda80-4e26-11f1-81e4-9b36d73222fd
+      - key: COSMIC_READ_KEY
+        fromFile: cosmic_read_key
+      - key: COSMIC_WRITE_KEY
+        fromFile: cosmic_write_key
+      - key: NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
+        value: root
+      - key: CLOUDINARY_API_KEY
+        fromFile: cloudinary_api_key
+      - key: CLOUDINARY_API_SECRET
+        fromFile: cloudinary_api_secret
+      - key: NEXTAUTH_SECRET
+        fromFile: nextauth_secret
+      - key: GITHUB_ID
+        fromFile: github_id
+      - key: GITHUB_SECRET
+        fromFile: github_secret
+    envVarGroups:
+      - name: postgresql
+        isStatic: true
+        envVars:
+          - key: DATABASE_URL
+            value: ${{ RENDER_DATABASE_URL }}
