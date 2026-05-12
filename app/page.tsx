@@ -1,23 +1,30 @@
+import Image from "next/image";
 import MusicLibrary from "@/components/MusicLibrary";
+import { AuthButton } from "@/components/AuthButton";
 
 export default function Home() {
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-1">Welcome to Spotify Clone</h1>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-        Powered by{" "}
-        <a
-          href="https://cosmicjs.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[#1DB954] hover:text-[#1ed760]"
-        >
-          Cosmic
-        </a>
-      </p>
+    <main className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
+      <section className="relative h-[500px] w-full flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10" />
+        <Image
+          src="/images/hero.png"
+          alt="Musique Pour Tous - Music for Everyone"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="relative z-20 text-center text-white">
+          <h1 className="text-5xl font-bold mb-4">Musique Pour Tous</h1>
+          <p className="text-xl text-gray-300 mb-8">
+            La musique gratuite pour tous
+          </p>
+          <AuthButton />
+        </div>
+      </section>
 
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Browse Albums</h2>
+      <section className="container mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold text-white mb-8">Découvrez les albums</h2>
         <MusicLibrary />
       </section>
     </main>
